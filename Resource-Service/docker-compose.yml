@@ -1,0 +1,97 @@
+version: '3.7'
+services:
+  resource_service_db:
+    image: postgres:15.1
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=resource_service
+    ports:
+      - "5433:5432"
+    volumes:
+      - pguserdata:/var/lib/postgresql/data
+  song_service_db:
+    image: postgres:15.1
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=song_service
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgpostdata:/var/lib/postgresql/data
+#  resource_service:
+#    image: epamvahansanoyan/resource_service:1.0.0
+#    environment:
+#      - DATASOURCE_PASSWORD=admin
+#      - DATASOURCE_URL=jdbc:postgresql://resource_service_db:5432/
+#      - DATASOURCE_USERNAME=postgres
+#      - SERVER_PORT=8085
+#    ports:
+#      - "8085:8085"
+#    depends_on:
+#      - resource_service_db
+#  song_service:
+#    build: # specify configurations for building the service image
+#      context: ../Song-Service  # specify the directory which contains the Dockerfile
+#      dockerfile: Dockerfile
+#    environment:
+#      - DATASOURCE_PASSWORD=admin
+#      - DATASOURCE_URL=jdbc:postgresql://song_service_db:5432/song_service
+#      - DATASOURCE_USERNAME=postgres
+#      - SERVER_PORT=8083
+#      - RESOURCE_SERVICE_URL=http://resource_service:8085/
+#    ports:
+#      - "8083:8083"
+#    depends_on:
+#      - song_service_db
+
+volumes:
+  pguserdata:
+  pgpostdata:
+
+#version: '3'
+#services:
+#  song_service:
+#    image: your-song-service-image:latest
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - song_postgres
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://song_postgres:5432/songdb
+#      - SPRING_DATASOURCE_USERNAME=your_songdb_username
+#      - SPRING_DATASOURCE_PASSWORD=your_songdb_password
+#
+#  resource_service:
+#    image: epamvahansanoyan/resource_service:1.0.0
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - resource_postgres
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://resource_postgres:5432/resourcedb
+#      - SPRING_DATASOURCE_USERNAME=your_resourcedb_username
+#      - SPRING_DATASOURCE_PASSWORD=your_resourcedb_password
+#
+#  song_postgres:
+#    image: postgres:latest
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_DB: songdb
+#      POSTGRES_USER: root
+#      POSTGRES_PASSWORD: root
+#
+#  resource_postgres:
+#    image: postgres:latest
+#    ports:
+#      - "5433:5432"
+#    environment:
+#      POSTGRES_DB: resourcedb
+#      POSTGRES_USER: root
+#      POSTGRES_PASSWORD: root
+#
+#volumes:
+#  pg_data:
+

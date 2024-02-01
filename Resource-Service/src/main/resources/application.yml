@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT}
+spring:
+  jpa:
+    properties:
+      hibernate.type.wrapper_array_handling: LEGACY
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driverClassName: org.postgresql.Driver
